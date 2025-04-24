@@ -54,6 +54,58 @@ chainlit run voice_assistant_app.py
 
 Then open your browser and navigate to http://localhost:8000
 
+### Setting Up as a System Service
+
+To run the voice assistant as a system service using systemd:
+
+1. Create a systemd service file:
+```bash
+sudo nano /etc/systemd/system/voiceassistant.service
+```
+
+2. Add the following configuration:
+```
+[Unit]
+Description=AI Voice Assistant
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/voiceassistant
+ExecStart=/root/voiceassistant/venv/bin/python -m chainlit run /root/voiceassistant/voice_assistant_app.py --host 0.0.0.0 --port 8080
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=voiceassistant
+Environment="PATH=/root/voiceassistant/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Reload systemd to recognize the new service:
+```bash
+sudo systemctl daemon-reload
+```
+
+4. Enable the service to start on boot:
+```bash
+sudo systemctl enable voiceassistant
+```
+
+5. Start the service:
+```bash
+sudo systemctl start voiceassistant
+```
+
+6. Check the service status:
+```bash
+sudo systemctl status voiceassistant
+```
+
+Your voice assistant will now be accessible at `http://your-server-ip:8080` and will automatically restart if it crashes or if the server reboots.
+
 ## 🔧 Configuration
 
 ### Voice Settings
