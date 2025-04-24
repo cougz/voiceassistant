@@ -1,0 +1,50 @@
+[project]
+# Disable telemetry
+enable_telemetry = false
+
+# Session timeout in seconds
+session_timeout = 3600
+
+# Authorized origins
+allow_origins = ["*"]
+
+[features]
+# Process and display HTML in messages
+unsafe_allow_html = false
+
+# Process and display mathematical expressions
+latex = false
+# Add this line to enable the microphone button
+speech_to_text = true
+
+# File upload settings
+[features.spontaneous_file_upload]
+    enabled = true
+    accept = ["audio/*", "text/plain"]
+    max_files = 5
+    max_size_mb = 100
+
+# Audio recording settings
+[features.audio]
+    min_decibels = -45
+    initial_silence_timeout = 3000
+    silence_timeout = 1500
+    max_duration = 15000
+    chunk_duration = 1000
+    sample_rate = 44100
+
+[UI]
+# Name of the app and chatbot
+name = "Product Enablement Voice Assistant"
+
+# Description of the app and chatbot
+description = "Speak or type to interact with the AI assistant"
+
+# Don't show readme by default
+show_readme_as_default = false
+
+# Hide chain of thought details
+hide_cot = true
+
+[meta]
+generated_by = "1.1.0"

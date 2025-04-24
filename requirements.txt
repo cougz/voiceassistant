@@ -1,0 +1,8 @@
+chainlit>=1.1.0
+openai==1.68.2
+nvidia-riva-client==2.18.0
+python-dotenv==1.0.1
+srt==3.5.3
+pydub==0.25.1
+numpy==1.26.1
+ffmpeg-python==0.2.0
